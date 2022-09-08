@@ -1,4 +1,5 @@
 const express = require('express');
+const helmet = require("helmet");
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const app = express();
@@ -13,6 +14,7 @@ mongoose.connect('mongodb://localhost:27017',
   .then(() => console.log('Connexion à MongoDB réussie !'))
   .catch(() => console.log('Connexion à MongoDB échouée !'));
 
+app.use(helmet());
 //CORS
 app.use((req, res, next) => {
    res.setHeader('Access-Control-Allow-Origin', '*');
