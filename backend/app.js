@@ -1,7 +1,9 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
 const app = express();
-
+const postRoutes = require('./routes/post');
+const userRoutes = require('./routes/user');
 app.use(express.json());
 
 //Connexion DB
@@ -18,5 +20,10 @@ app.use((req, res, next) => {
    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
    next();
  });
+
+app.use(bodyParser.json())
+app.use('/api/posts', postRoutes);
+app.use('/api/auth', userRoutes);
+
 
 module.exports = app;
